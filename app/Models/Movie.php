@@ -11,10 +11,10 @@ class Movie extends Model
 
     protected $table = 'movies';
     protected $primaryKey = 'idMovie';
-    public $incrementing = false;
+    public $incrementing = true;
+    protected $keyType = 'int';
 
     protected $fillable = [
-        'idMovie',
         'Director_idDirector',
         'Studio_idStudio',
         'name_movie',
