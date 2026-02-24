@@ -53,32 +53,50 @@ class MovieController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Movie $movie)
     {
-        //
+        return view('movies.show', compact('movie'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Movie $movie)
     {
-        //
+        $directors = Director::all();
+        $studios = Studio::all();
+
+        return view('movies.edit', compact('movie', 'directors', 'studios'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Movie $movie)
     {
-        //
+        $validated = $request->validate([
+            'name_movie' => ['required', 'string', 'max:40'],
+            'Director_idDirector' => ['required', 'integer'],
+            'Studio_idStudio' => ['required', 'integer'],
+            'country_of_release' => ['required', 'string', 'max:20'],
+            'year_of_release' => ['required', 'integer'],
+            'language' => ['required', 'string', 'max:15'],
+            'filming_location' => ['required', 'string', 'max:30'],
+            'category' => ['required', 'string', 'max:20'],
+        ]);
+
+        $movie->update($validated);
+
+        return redirect()->route('movies.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Movie $movie)
     {
-        //
+        $movie->delete();
+
+        return redirect()->route('movies.index');
     }
 }

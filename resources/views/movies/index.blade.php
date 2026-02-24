@@ -29,6 +29,7 @@
                                 <th>Language</th>
                                 <th>Location</th>
                                 <th>Category</th>
+                                <th class="text-end pe-3">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -43,10 +44,24 @@
                                     <td>{{ $movie->language }}</td>
                                     <td>{{ $movie->filming_location }}</td>
                                     <td>{{ $movie->category }}</td>
+                                    <td class="text-end pe-3">
+                                        <div class="d-inline-flex gap-2">
+                                            <a href="{{ route('movies.edit', $movie->idMovie) }}" class="btn btn-sm btn-outline-primary">
+                                                Edit
+                                            </a>
+                                            <form action="{{ route('movies.destroy', $movie->idMovie) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this movie?');">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-sm btn-outline-danger">
+                                                    Delete
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </td>
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="9" class="text-center text-muted py-5">
+                                    <td colspan="10" class="text-center text-muted py-5">
                                         No movies found.
                                     </td>
                                 </tr>
