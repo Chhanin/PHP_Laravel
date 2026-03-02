@@ -14,7 +14,7 @@ class MovieController extends Controller
      */
     public function index()
     {
-        $movies = Movie::all();
+        $movies = Movie::with(['director', 'studio'])->get();
         return view('movies.index', compact('movies'));
     }
 

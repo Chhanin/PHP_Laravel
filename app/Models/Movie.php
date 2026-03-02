@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Movie extends Model
 {
@@ -24,4 +25,14 @@ class Movie extends Model
         'filming_location',
         'category'
     ];
+
+    public function director(): BelongsTo
+    {
+        return $this->belongsTo(Director::class, 'Director_idDirector', 'idDirector');
+    }
+
+    public function studio(): BelongsTo
+    {
+        return $this->belongsTo(Studio::class, 'Studio_idStudio', 'idStudio');
+    }
 }

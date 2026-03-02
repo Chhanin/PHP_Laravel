@@ -22,8 +22,8 @@
                             <tr>
                                 <th class="ps-3">ID</th>
                                 <th>Title</th>
-                                <th>Director ID</th>
-                                <th>Studio ID</th>
+                                <th>Director</th>
+                                <th>Studio</th>
                                 <th>Country</th>
                                 <th>Year</th>
                                 <th>Language</th>
@@ -37,8 +37,8 @@
                                 <tr>
                                     <td class="ps-3 fw-semibold">{{ $movie->idMovie }}</td>
                                     <td>{{ $movie->name_movie }}</td>
-                                    <td>{{ $movie->Director_idDirector }}</td>
-                                    <td>{{ $movie->Studio_idStudio }}</td>
+                                    <td>{{ optional($movie->director)->name_director ?? '-' }}</td>
+                                    <td>{{ optional($movie->studio)->company_name ?? '-' }}</td>
                                     <td>{{ $movie->country_of_release }}</td>
                                     <td>{{ $movie->year_of_release }}</td>
                                     <td>{{ $movie->language }}</td>
